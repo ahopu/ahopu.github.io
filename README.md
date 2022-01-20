@@ -1,2 +1,1 @@
-# ahopu.github.io
-amgir Hossain, a mechanical design engineer
+HI, i'm ALamgir Hossain, a mechanical design engineer
