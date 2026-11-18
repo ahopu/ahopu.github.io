@@ -1,0 +1,576 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Date? ☕</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --coffee:#76513c;
+  --dark:#38251d;
+  --cream:#faf3e9;
+  --tan:#e9d5c0;
+  --latte:#c69b78;
+}
+
+body {
+  margin:0;
+  background:var(--cream);
+  color:var(--dark);
+  font-family:'DM Sans',sans-serif;
+}
+
+.main {
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px 15px;
+  position:relative;
+  overflow:hidden;
+}
+
+.bg-circle {
+  position:absolute;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:#e9d5c0;
+  opacity:.6;
+}
+
+.circle1 {top:-130px;left:-100px;}
+.circle2 {bottom:-140px;right:-100px;background:#d9bba1;}
+
+.date-card {
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:550px;
+  background:#fffdf9;
+  padding:40px 30px;
+  border-radius:28px;
+  text-align:center;
+  box-shadow:0 20px 60px #63412b18;
+  border:1px solid #eee1d4;
+}
+
+.brand {
+  color:var(--coffee);
+  font-size:12px;
+  letter-spacing:3px;
+  font-weight:700;
+}
+
+h1 {
+  font-family:'Playfair Display',serif;
+  font-size:46px;
+  font-weight:700;
+}
+
+.subtitle {
+  color:#96877d;
+  line-height:1.8;
+  max-width:360px;
+  margin:auto;
+  font-size:14px;
+}
+
+.coffee-emoji {
+  font-size:95px;
+  margin:22px 0;
+  animation:float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+  50% {transform:translateY(-12px);}
+}
+
+.question {
+  font-family:'Playfair Display',serif;
+  font-size:27px;
+  margin:25px 0;
+}
+
+.btn-yes {
+  background:var(--coffee);
+  color:white;
+  border:none;
+  border-radius:50px;
+  padding:13px 35px;
+  font-weight:700;
+}
+
+.btn-yes:hover {
+  background:var(--dark);
+  color:white;
+  transform:scale(1.04);
+}
+
+.btn-no {
+  background:#f1e4d8;
+  color:#8d6650;
+  border:none;
+  border-radius:50px;
+  padding:13px 35px;
+  font-weight:700;
+}
+
+.button-area {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  min-height:65px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.hidden {display:none!important;}
+
+.form-label {
+  font-weight:600;
+  font-size:14px;
+  color:var(--dark);
+}
+
+.form-control,.form-select {
+  border:1px solid #e5d6c8;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:16px;
+}
+
+.form-control:focus,.form-select:focus {
+  border-color:var(--latte);
+  box-shadow:0 0 0 .2rem #c69b7830;
+}
+
+.coffee-menu {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin:20px 0;
+  text-align:center;
+}
+
+.coffee-option {
+  border:2px solid #eee1d4;
+  border-radius:17px;
+  padding:15px 8px;
+  cursor:pointer;
+  background:#fffdf9;
+  transition:.2s;
+}
+
+.coffee-option:hover {
+  border-color:var(--latte);
+  transform:translateY(-3px);
+}
+
+.coffee-option.selected {
+  border-color:var(--coffee);
+  background:#f5eadd;
+}
+
+.drink-icon {
+  font-size:38px;
+  display:block;
+  margin-bottom:7px;
+}
+
+.drink-name {
+  font-weight:700;
+  font-size:13px;
+}
+
+.drink-description {
+  color:#99877a;
+  font-size:11px;
+  margin-top:4px;
+}
+
+.footer {
+  color:#b2a092;
+  font-size:12px;
+  margin-top:30px;
+}
+
+.heart {
+  position:fixed;
+  bottom:-30px;
+  z-index:10;
+  pointer-events:none;
+  animation:rise 4s linear forwards;
+}
+
+@keyframes rise {
+  to {
+    transform:translateY(-110vh) rotate(30deg);
+    opacity:0;
+  }
+}
+
+.confirm-box {
+  background:#f5eadd;
+  border-radius:16px;
+  padding:20px;
+  text-align:left;
+  line-height:2.2;
+  font-size:14px;
+  overflow-wrap:anywhere;
+}
+
+@media(max-width:480px) {
+  .date-card {padding:35px 19px;}
+  h1 {font-size:38px;}
+  .question {font-size:23px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="main">
+
+<div class="bg-circle circle1"></div>
+<div class="bg-circle circle2"></div>
+
+<div class="date-card">
+
+<!-- INVITATION -->
+<section id="home">
+
+<div class="brand">♡ A LITTLE INVITATION ♡</div>
+
+<div class="coffee-emoji">☕</div>
+
+<h1>Coffee Date?</h1>
+
+<p class="subtitle">
+Life is too short for bad coffee and boring conversations.
+Let's make a beautiful memory together.
+</p>
+
+<div class="question">
+Would you like to grab a coffee with me?
+</div>
+
+<div class="button-area">
+
+<button class="btn btn-yes" onclick="acceptDate()">
+YES! 🤎
+</button>
+
+<button class="btn btn-no" id="noBtn"
+onmouseover="moveNo()" onclick="moveNo()">
+NO 🙈
+</button>
+
+</div>
+
+<div class="footer">
+Made with love, coffee and a little magic ✨
+</div>
+</section>
+
+
+<!-- SUCCESS -->
+<section id="success" class="hidden">
+
+<div class="brand">IT'S A DATE! 🤎</div>
+
+<div class="coffee-emoji">🥰☕</div>
+
+<h1>Yaaay!</h1>
+
+<p class="subtitle">
+You just made my day! I can't wait to share
+a cup of coffee and some lovely moments with you.
+</p>
+
+<div class="question">Let's plan our coffee date!</div>
+
+<button class="btn btn-yes mt-3" onclick="openPlanner()">
+Choose Our Coffee →
+</button>
+
+</section>
+
+
+<!-- PLANNER -->
+<section id="planner" class="hidden">
+
+<div class="brand">OUR LITTLE COFFEE DATE</div>
+
+<div class="coffee-emoji" style="font-size:65px">☕🥐</div>
+
+<h1>Let's Plan It!</h1>
+
+<p class="subtitle mb-3">
+Choose your favorite coffee and our perfect date.
+</p>
+
+<form id="dateForm">
+
+<div class="text-start">
+
+<label class="form-label">📅 Date</label>
+<input type="date" id="date" class="form-control" required>
+
+<label class="form-label">⏰ Time</label>
+<select id="time" class="form-select" required>
+<option value="">Choose time</option>
+<option>10:00 AM</option>
+<option>11:00 AM</option>
+<option>1:00 PM</option>
+<option>3:00 PM</option>
+<option>5:00 PM</option>
+<option>7:00 PM</option>
+</select>
+
+<label class="form-label">🍽️ Choose Your Restaurant</label>
+<select id="restaurant" class="form-select" required>
+<option value="">Where should we go?</option>
+<option>Beyti Restaurant</option>
+<option>Sultan Restaurant</option>
+<option>Bosphorus</option>
+<option>Daata Restaurant</option>
+<option>Latin Restaurant</option>
+</select>
+
+<label class="form-label">☕ Choose Your Coffee</label>
+
+</div>
+
+<div class="coffee-menu">
+
+<div class="coffee-option selected" onclick="chooseCoffee(this,'Cappuccino')">
+<span class="drink-icon">☕</span>
+<div class="drink-name">Cappuccino</div>
+<div class="drink-description">Creamy & classic</div>
+</div>
+
+<div class="coffee-option" onclick="chooseCoffee(this,'Iced Latte')">
+<span class="drink-icon">🧋</span>
+<div class="drink-name">Iced Latte</div>
+<div class="drink-description">Cold & refreshing</div>
+</div>
+
+<div class="coffee-option" onclick="chooseCoffee(this,'Caramel Macchiato')">
+<span class="drink-icon">🍮</span>
+<div class="drink-name">Caramel Macchiato</div>
+<div class="drink-description">Sweet & delicious</div>
+</div>
+
+<div class="coffee-option" onclick="chooseCoffee(this,'Mocha')">
+<span class="drink-icon">🍫</span>
+<div class="drink-name">Mocha</div>
+<div class="drink-description">Coffee & chocolate</div>
+</div>
+
+<div class="coffee-option" onclick="chooseCoffee(this,'Americano')">
+<span class="drink-icon">☕</span>
+<div class="drink-name">Americano</div>
+<div class="drink-description">Bold & strong</div>
+</div>
+
+<div class="coffee-option" onclick="chooseCoffee(this,'Matcha Latte')">
+<span class="drink-icon">🍵</span>
+<div class="drink-name">Matcha Latte</div>
+<div class="drink-description">Green & creamy</div>
+</div>
+
+</div>
+
+<div class="text-start">
+
+<label class="form-label">💌 A little message</label>
+
+<textarea id="message" class="form-control"
+rows="3" placeholder="Tell me something sweet..."></textarea>
+
+</div>
+
+<button type="submit" class="btn btn-yes w-100 mt-2">
+Confirm Our Coffee Date 🤎
+</button>
+
+</form>
+
+</section>
+
+
+<!-- FINAL CONFIRMATION -->
+<section id="final" class="hidden">
+
+<div class="brand">OUR DATE IS SET ♡</div>
+
+<div class="coffee-emoji">💌☕</div>
+
+<h1>It's Official!</h1>
+
+<p class="subtitle">
+A cup of coffee, a beautiful conversation,
+and a special person. What could be better?
+</p>
+
+<div id="details" class="confirm-box mt-4"></div>
+
+<button class="btn btn-yes mt-4" onclick="shareDate()">
+Share Our Date 💌
+</button>
+
+<button class="btn btn-no mt-3" onclick="location.reload()">
+Start Again ♡
+</button>
+
+<div class="footer">Can't wait to see you! 🤎</div>
+
+</section>
+
+</div>
+</div>
+
+
+<script>
+
+let selectedCoffee = "Cappuccino";
+let dateSummary = "";
+
+function showScreen(id) {
+  ["home","success","planner","final"].forEach(screen => {
+    document.getElementById(screen).classList.add("hidden");
+  });
+  document.getElementById(id).classList.remove("hidden");
+}
+
+function acceptDate() {
+  showScreen("success");
+  hearts();
+}
+
+function openPlanner() {
+  showScreen("planner");
+
+  const today = new Date();
+  const localToday = new Date(
+    today.getTime() - today.getTimezoneOffset() * 60000
+  ).toISOString().split("T")[0];
+
+  document.getElementById("date").min = localToday;
+}
+
+function moveNo() {
+  const btn = document.getElementById("noBtn");
+  btn.style.position = "fixed";
+  btn.style.left = Math.random() *
+    Math.max(0, window.innerWidth - btn.offsetWidth - 20) + "px";
+  btn.style.top = Math.random() *
+    Math.max(0, window.innerHeight - btn.offsetHeight - 20) + "px";
+}
+
+function chooseCoffee(element, coffee) {
+  document.querySelectorAll(".coffee-option").forEach(option => {
+    option.classList.remove("selected");
+  });
+
+  element.classList.add("selected");
+  selectedCoffee = coffee;
+}
+
+function hearts() {
+  const symbols = ["🤎","☕","💕","✨","🥐"];
+
+  for(let i = 0; i < 25; i++) {
+    setTimeout(() => {
+      const item = document.createElement("div");
+      item.className = "heart";
+      item.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+      item.style.left = Math.random()*100 + "vw";
+      item.style.fontSize = (18 + Math.random()*15) + "px";
+      item.style.animationDuration = (3 + Math.random()*2) + "s";
+      document.body.appendChild(item);
+      setTimeout(() => item.remove(), 5000);
+    }, i*100);
+  }
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
+}
+
+document.getElementById("dateForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
+  const restaurant = document.getElementById("restaurant").value;
+  const message = document.getElementById("message").value;
+
+  const formattedDate = new Date(date + "T12:00:00")
+    .toLocaleDateString("en-US", {
+      year:"numeric", month:"long", day:"numeric"
+    });
+
+  dateSummary = `
+    💌 OUR COFFEE DATE
+
+    Date: ${formattedDate}
+    Time: ${time}
+    Restaurant: ${restaurant}
+    Coffee: ${selectedCoffee}
+    Message: ${message || "Can't wait!"}
+  `;
+
+  document.getElementById("details").innerHTML = `
+    <strong>📅 Date:</strong> ${escapeHTML(formattedDate)}<br>
+    <strong>⏰ Time:</strong> ${escapeHTML(time)}<br>
+    <strong>🍽️ Restaurant:</strong> ${escapeHTML(restaurant)}<br>
+    <strong>☕ Coffee:</strong> ${escapeHTML(selectedCoffee)}<br>
+    <strong>💌 Message:</strong> ${escapeHTML(message || "Can't wait!")}
+  `;
+
+  showScreen("final");
+  hearts();
+});
+
+async function shareDate() {
+  if(navigator.share) {
+    try {
+      await navigator.share({
+        title:"Our Coffee Date ☕",
+        text:dateSummary
+      });
+    } catch(error) {
+      if(error.name !== "AbortError") {
+        alert("Unable to share. Please try again.");
+      }
+    }
+  } else if(navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(dateSummary);
+      alert("Coffee date details copied! 🤎");
+    } catch(error) {
+      alert(dateSummary);
+    }
+  } else {
+    alert(dateSummary);
+  }
+}
+
+</script>
+
+</body>
+</html>
